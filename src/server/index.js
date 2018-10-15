@@ -1,59 +1,88 @@
-var express = require('express');
-var app = express();
-var bodyParser = require("body-parser");
-var request = require('request');
+const config = require('./config.js');
+
+const express = require('express');
+
+const app = express();
+
+const bodyParser = require('body-parser');
+
+const request = require('request');
+
 const router = express.Router();
+
+const path = require('path');
+
+const port = process.env.PORT || 3000;
+
+const Authorization = config.Authorization; 
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-var request = require('request-promise');
 
-//npm run webpack
-//npm start
+var atExpireTime = '';
+var accessToken = '';
 
-router.post('/')
-let accessToken = '';
-let tokenTimeLeft = '';
-
-function getAccessToken() {
-    var token = '';
-    var options = { method: 'POST',
+app.get('/generateAT', (req, res) => {  
+  console.log('generating AT');
+  var options = { method: 'POST',
     url: 'https://api.vasttrafik.se/token',
     headers: 
-    { 'Content-Type': 'application/x-www-form-urlencoded',
-        'Postman-Token': '7d6dda02-a283-4584-b710-8db203074ef9',
+      { 'Content-Type': 'application/x-www-form-urlencoded',
+        'Postman-Token': '6a493e89-6ee9-4929-a4ad-a78dae6cf018',
         'Cache-Control': 'no-cache',
-        Authorization: 'Basic VUFmVExKQ1pmM1JLdDNma3NUc3ZudWRnNnFJYTpDSEIwU01Qal8wMGFPNGVCbDNZUk85ODlvcEFh' },
-    form: { grant_type: 'client_credentials', scope: 'device_postman' } };
+        Authorization: `Basic ${Authorization}` },
+      form: { grant_type: 'client_credentials', scope: 'device_postman' } };
+      
+      request(options, function (error, response, body) {
+      if (error) throw new Error(error);
+        let result = JSON.parse(body);
+        try {
+          atExpireTime = result.expires_in;
+          accessToken = result.access_token;
+        } catch (error) {
+          console.error(error);
+        }
+      res.json(result);
+    });
+});
 
-    request(options, function (error, response, body) {
-        if (error) throw new Error(error);
-        var testString = 'inne i request';
-        }).then(console.log);
-}
+app.get('/searchStop/:input', (req, res) => {
+  let paramsInput = req.params.input;
 
-function searchStop (aT) {
-    console.log(accessToken);
-    var options = { method: 'GET',
-        url: 'https://api.vasttrafik.se/bin/rest.exe/v2/location.name',
-        qs: { input: 'olof', format: 'json' },
-        headers: 
-        { 'Postman-Token': '0dbdfc0c-96aa-46c1-980c-9e9755dee9fa',
-            'Cache-Control': 'no-cache',
-            Authorization: 'Bearer ' + aT } };
+  var options = { method: 'GET',
+    url: 'https://api.vasttrafik.se/bin/rest.exe/v2/location.name',
+    qs: { input: paramsInput, format: 'json' },
+    headers: 
+    { 'Postman-Token': '12e9b05b-01e1-443a-91e2-88990723e868',
+      'Cache-Control': 'no-cache',
+      Authorization: `Bearer ${accessToken}` } };
 
-        request(options, function (error, response, body) {
-        if (error) throw new Error(error);
+  request(options, function (error, response, body) {
+    if (error) throw new Error(error);
+    let result = JSON.parse(body);
+    res.json(result.LocationList.StopLocation);
+  });
+});
 
-        console.log(body);
-        });
-}
+app.get('/getDB/:input', (req, res) => {
+  let paramsInput = req.params.input;
 
-console.log('... Starting server ... ');
+  var options = { method: 'GET',
+    url: 'https://api.vasttrafik.se/bin/rest.exe/v2/departureBoard',
+    qs: { id: paramsInput, format: 'json' },
+    headers: 
+    { 'Postman-Token': '814325f8-8305-4664-9d2f-505c6f335357',
+      'Cache-Control': 'no-cache',
+      Authorization: `Bearer ${accessToken}` } };
 
-getAccessToken();
+  request(options, function (error, response, body) {
+    if (error) throw new Error(error);
+    let result = JSON.parse(body);
+    res.json(result.DepartureBoard.Departure);
+  });
+});
 
-//console.log('get access token return ' + getAccessToken());
-//searchStop(accessToken);
+app.use(express.static(`${__dirname}./../../`)); // serves the index.html
+app.listen(port); // listens on port 
+console.log(`... Starting server ... (on port ${port}) `);
 
-app.use(express.static(__dirname +'./../../')); //serves the index.html
-app.listen(3000); //listens on port 3000 -> http://localhost:3000/

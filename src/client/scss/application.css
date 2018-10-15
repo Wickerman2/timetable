@@ -1,0 +1,17 @@
+body {
+  background: #FFFFFF;
+  color: #3C4650;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+h1 {
+  font-family: Helvetica; }
+
+.searchBar {
+  overflow: hidden;
+  background-color: #019DDB;
+  height: 4em; }
+
+.searchField {
+  background-color: red;
+  margin: auto;
+  width: 60%; }
