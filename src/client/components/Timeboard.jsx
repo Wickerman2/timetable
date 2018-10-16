@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import '../scss/application.css';
 import { Table } from 'react-bootstrap';
 import dateFormat from 'dateformat';
+import { ClipLoader } from 'react-spinners';
+import { css } from 'react-emotion';
+
+const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+`;
+
 
 
 class Timeboard extends Component {
@@ -68,7 +77,9 @@ class Timeboard extends Component {
 
     render() {
         return (
-            <div className="timeBoard">          
+            
+            <div className="timeBoard">
+          
                 <Table responsive>
                 <thead>
                     <tr>
@@ -80,7 +91,16 @@ class Timeboard extends Component {
                 </thead>
 
                 <tbody>
-                    { this.createTableRows() }
+                    {this.props.isDBLoaded ? this.createTableRows() : 
+                        <div className='sweet-loading'>
+                            <ClipLoader
+                            className={override}
+                            sizeUnit={"px"}
+                            size={150}
+                            color={'#123abc'}
+                            loading={true}
+                            />
+                    </div> }
                 </tbody>
                 </Table>;
             </div>

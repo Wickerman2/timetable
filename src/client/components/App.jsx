@@ -12,42 +12,57 @@ class App extends Component {
         autocompleteData: [],
         currentDB: [],
         curTime: '',
-        apiFetched: false
+        isDBLoaded: true
       }
     this.onChange = this.onChange.bind(this);
     this.onSelect = this.onSelect.bind(this);
     this.getItemValue = this.getItemValue.bind(this);
     this.renderItem = this.renderItem.bind(this);
     this.searchStopData = this.searchStopData.bind(this);
-    this.debounceAutocomplete = _.debounce(this.searchStopData, 400);
+    this.debounceAutocomplete = _.debounce(this.searchStopData,350);
     }
 
-  componentDidMount() {    
+  componentDidMount() {
+    this.generateAccessToken();
+    setInterval(this.generateAccessToken, 1000 * 60 * 60);
+  }
+
+  generateAccessToken() {
     try {
       fetch('/generateAT');
     } catch (err) {
       console.log(err);
+      console.log('Could not generate accesstoken!')
     }
+    console.log('generateAccessToken()');
   }
      
   async searchStopData(searchText){
-    if (searchText != '') {
-      try {               
+        console.log('searchText inte null');
+      try {
         const res = await fetch(`/searchStop/${searchText}`); 
         const result = await res.json();
+        console.log('json fetchad');
         this.setState({autocompleteData: result});
+        console.log('autocompletedata set');
         } catch (err) {
           console.log(err);
       }
-    }
   }
 
   async getDepartureBoard(stopID){
+    this.setState({
+      isDBLoaded: false
+    });
+
     if (stopID != '') {
       try {
         const res = await fetch(`/getDB/${stopID}`) 
         const result = await res.json();
-        this.setState({currentDB: result});
+        this.setState({
+          currentDB: result,
+          isDBLoaded: true
+        });
         } catch (err) {
           console.log(err);
       }
@@ -71,7 +86,9 @@ class App extends Component {
 
   onChange(e){
     this.setState({
-        value: e.target.value
+        value: e.target.value,
+        autocompleteData: []
+
     });
     e.persist()
     this.debounceAutocomplete(this.state.value);  
@@ -105,7 +122,7 @@ class App extends Component {
           />
         </div>
       <div>
-        <Timeboard currentDB={this.state.currentDB}/> 
+        <Timeboard currentDB={this.state.currentDB} isDBLoaded={this.state.isDBLoaded} /> 
       </div>
       </div>
     );
