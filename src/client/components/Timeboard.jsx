@@ -11,8 +11,6 @@ const override = css`
     border-color: red;
 `;
 
-
-
 class Timeboard extends Component {
     constructor(props) {
         super(props);
@@ -29,9 +27,18 @@ class Timeboard extends Component {
         },1000)
     }
 
-    createTableRows () {
+    compare (a,b) {
+        if (a.rtTime < b.rtTime)
+          return -1;
+        if (a.rtTime > b.rtTime)
+          return 1;
+        return 0;
+    }
+    
+    createTableRows() {
         let table = this.props.currentDB;
         let data = '';
+
         data = table.map(journey => {
             return (
                 <tr>
@@ -96,8 +103,8 @@ class Timeboard extends Component {
                             <ClipLoader
                             className={override}
                             sizeUnit={"px"}
-                            size={150}
-                            color={'#123abc'}
+                            size={100}
+                            color={'#3C4650'}
                             loading={true}
                             />
                     </div> }

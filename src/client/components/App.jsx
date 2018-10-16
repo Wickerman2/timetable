@@ -25,6 +25,7 @@ class App extends Component {
   componentDidMount() {
     this.generateAccessToken();
     setInterval(this.generateAccessToken, 1000 * 60 * 60);
+    // setInterval(this.getDepartureBoard(this.state.selectedStopID), 1000); 
   }
 
   generateAccessToken() {
@@ -34,19 +35,16 @@ class App extends Component {
       console.log(err);
       console.log('Could not generate accesstoken!')
     }
-    console.log('generateAccessToken()');
   }
      
   async searchStopData(searchText){
-        console.log('searchText inte null');
       try {
         const res = await fetch(`/searchStop/${searchText}`); 
         const result = await res.json();
-        console.log('json fetchad');
         this.setState({autocompleteData: result});
-        console.log('autocompletedata set');
         } catch (err) {
           console.log(err);
+          console.log('Could not search stopdata!')
       }
   }
 
@@ -55,7 +53,7 @@ class App extends Component {
       isDBLoaded: false
     });
 
-    if (stopID != '') {
+    if (stopID !== '') {
       try {
         const res = await fetch(`/getDB/${stopID}`) 
         const result = await res.json();
@@ -65,6 +63,8 @@ class App extends Component {
         });
         } catch (err) {
           console.log(err);
+          console.log('Could not get departureboard!')
+
       }
     }
     this.setState({
@@ -112,12 +112,12 @@ class App extends Component {
               value={this.state.value}
               onChange={this.onChange}
               onSelect={this.onSelect}
-              inputProps={{ style: { width: '100%', height: '50%', margin: '2% auto 0%', 'font-size': '16px' , 'border': '1px solid #c4c4c4'} }}  
+              inputProps={{ style: { width: '100%', height: '60%', 'margin-top': '10px', 'font-size': '16px' , 'border': '1px solid #c4c4c4', 'border-radius': '5px', 'padding-left': '7px'} }}  
               wrapperStyle={{ width: '50%', height: '100%', margin: 'auto'}}
 
             menuStyle={
               { borderRadius: '3px', boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)', background: 'rgba(255, 255, 255, 0.9)',
-              padding: '2px 0', fontSize: '115%', position: 'fixed', overflow: 'auto', maxHeight: '50%' }         
+              padding: '2px 0', fontSize: '115%', position: 'fixed', overflow: 'auto', maxHeight: '50%', 'padding-left': '7px' }         
             }
           />
         </div>
