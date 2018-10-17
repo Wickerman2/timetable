@@ -38,7 +38,8 @@ class Timeboard extends Component {
     createTableRows() {
         let table = this.props.currentDB;
         let data = '';
-
+        
+        try {
         data = table.map(journey => {
             return (
                 <tr>
@@ -49,7 +50,11 @@ class Timeboard extends Component {
                 </tr>   
             )      
         })
-
+        } catch (error) {
+            console.log(error);
+            console.log('Could not createTableRows!')
+        }
+        
         return data;
     }
 

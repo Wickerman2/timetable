@@ -38,6 +38,7 @@ class App extends Component {
   }
      
   async searchStopData(searchText){
+    console.log('searchText: ' + searchText);
       try {
         const res = await fetch(`/searchStop/${searchText}`); 
         const result = await res.json();

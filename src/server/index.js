@@ -47,6 +47,7 @@ app.get('/generateAT', (req, res) => {
 });
 
 app.get('/searchStop/:input', (req, res) => {
+  console.log('... Starting searchStop ...');
   let paramsInput = req.params.input;
 
   var options = { method: 'GET',
@@ -60,8 +61,19 @@ app.get('/searchStop/:input', (req, res) => {
   request(options, function (error, response, body) {
     if (error) throw new Error(error);
     let result = JSON.parse(body);
-    res.json(result.LocationList.StopLocation);
+    let data = [];
+    data.push(result.LocationList.StopLocation);
+    if ( typeof result.LocationList.StopLocation !== 'undefined') {
+      // console.log('OBJECT LENGTH: ' + Object.keys(result.LocationList.StopLocation).length);
+      if (Object.keys(result.LocationList.StopLocation).length === 5) {
+        res.send(data);
+      }
+      else {
+      res.send(result.LocationList.StopLocation); 
+      }
+    }
   });
+  
 });
 
 app.get('/getDB/:input', (req, res) => {
