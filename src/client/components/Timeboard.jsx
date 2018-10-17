@@ -26,25 +26,37 @@ class Timeboard extends Component {
           })
         },1000)
     }
-    
+
     createTableRows() {
         let table = this.props.currentDB;
         let data = '';
+
+        for (let i = 0; i < table.length; i++) { // Adding calculated time left to for each JSON object.  
+            let calcTimeLeft = this.calculateTimeLeft(table[i].rtTime, table[i].time, table[i].date);
+            table[i].calcTimeLeft = calcTimeLeft;
+        }
+
+        table.sort(function(a, b) {
+            return a.calcTimeLeft - b.calcTimeLeft || a.track - b.track;
+        });
         
         try {
         data = table.map(journey => {
+            if (journey.calcTimeLeft === 0) {
+                journey.calcTimeLeft = 'Nu';
+            }
             return (
                 <tr>
                     <td>{journey.name}</td> 
                     <td>{journey.direction}</td>
-                    <td>{this.calculateTimeLeft(journey.rtTime, journey.time, journey.date)}</td> 
+                    <td>{journey.calcTimeLeft}</td> 
                     <td>{journey.track}</td>
                 </tr>   
             )      
         })
         } catch (error) {
             console.log(error);
-            console.log('Could not createTableRows!')
+            console.log('Could not createTableRows!');
         }
         
         return data;
@@ -71,19 +83,13 @@ class Timeboard extends Component {
             roundedMinutes = Math.round(diffMinutes);
         }
 
-        if (roundedMinutes === 0) {
-            return 'Nu';
-        }
-        else {
-            return roundedMinutes;
-        } 
+        return roundedMinutes;
     }
 
     render() {
         return (
             
-            <div className="timeBoard">
-          
+            <div className="timeBoard">          
                 <Table responsive>
                 <thead>
                     <tr>
@@ -95,17 +101,9 @@ class Timeboard extends Component {
                 </thead>
 
                 <tbody>
-                {this.props.isDBLoaded ? this.createTableRows() : 
-                    <div className='sweet-loading'>
-                        <ClipLoader
-                        className={override}
-                        sizeUnit={"px"}
-                        size={100}
-                        color={'#3C4650'}
-                        loading={true}
-                        />
-                </div> }
+                    {this.createTableRows()};
                 </tbody>
+
                 </Table>;
             </div>
         );
@@ -113,3 +111,15 @@ class Timeboard extends Component {
 }
 
 export default Timeboard;
+/*
+{this.props.isDBLoaded ? this.createTableRows() : 
+    <div className='sweet-loading'>
+        <ClipLoader
+        className={override}
+        sizeUnit={"px"}
+        size={100}
+        color={'#3C4650'}
+        loading={true}
+        />
+    </div>}
+*/

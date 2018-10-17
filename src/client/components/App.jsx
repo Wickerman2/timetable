@@ -97,6 +97,7 @@ class App extends Component {
   }
 
   refreshCurrentDB() {
+    console.log('fresh');
     this.getDepartureBoard(this.state.selectedStopID);
   }
 
@@ -106,7 +107,10 @@ class App extends Component {
         stopSelected: true
     });
     this.getDepartureBoard(val);
-    setInterval(this.refreshCurrentDB, (30 * 1000)); 
+
+    clearInterval(refreshInterval);
+    let refreshInterval = setInterval(this.refreshCurrentDB, (30 * 1000)); 
+    
   }
 
   render() {
