@@ -26,14 +26,6 @@ class Timeboard extends Component {
           })
         },1000)
     }
-
-    compare (a,b) {
-        if (a.rtTime < b.rtTime)
-          return -1;
-        if (a.rtTime > b.rtTime)
-          return 1;
-        return 0;
-    }
     
     createTableRows() {
         let table = this.props.currentDB;
@@ -103,16 +95,16 @@ class Timeboard extends Component {
                 </thead>
 
                 <tbody>
-                    {this.props.isDBLoaded ? this.createTableRows() : 
-                        <div className='sweet-loading'>
-                            <ClipLoader
-                            className={override}
-                            sizeUnit={"px"}
-                            size={100}
-                            color={'#3C4650'}
-                            loading={true}
-                            />
-                    </div> }
+                {this.props.isDBLoaded ? this.createTableRows() : 
+                    <div className='sweet-loading'>
+                        <ClipLoader
+                        className={override}
+                        sizeUnit={"px"}
+                        size={100}
+                        color={'#3C4650'}
+                        loading={true}
+                        />
+                </div> }
                 </tbody>
                 </Table>;
             </div>

@@ -9,11 +9,13 @@ class App extends Component {
       this.state = { 
         value: 'Sök hållplats', 
         selectedStopID: '',
+        stopSelected: false,
         autocompleteData: [],
         currentDB: [],
         curTime: '',
         isDBLoaded: true
       }
+    this.refreshCurrentDB = this.refreshCurrentDB.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onSelect = this.onSelect.bind(this);
     this.getItemValue = this.getItemValue.bind(this);
@@ -25,7 +27,6 @@ class App extends Component {
   componentDidMount() {
     this.generateAccessToken();
     setInterval(this.generateAccessToken, 1000 * 60 * 60);
-    // setInterval(this.getDepartureBoard(this.state.selectedStopID), 1000); 
   }
 
   generateAccessToken() {
@@ -85,7 +86,7 @@ class App extends Component {
     return item.id;
   }
 
-  onChange(e){
+  onChange(e){ // Kolla så att det inte finns några skadliga tecken innan !!! 
     this.setState({
         value: e.target.value,
         autocompleteData: []
@@ -95,11 +96,17 @@ class App extends Component {
     this.debounceAutocomplete(this.state.value);  
   }
 
+  refreshCurrentDB() {
+    this.getDepartureBoard(this.state.selectedStopID);
+  }
+
   onSelect(val){ 
     this.setState({
         selectedStopID: val,
+        stopSelected: true
     });
-    this.getDepartureBoard(val); 
+    this.getDepartureBoard(val);
+    setInterval(this.refreshCurrentDB, (30 * 1000)); 
   }
 
   render() {
@@ -123,7 +130,11 @@ class App extends Component {
           />
         </div>
       <div>
-        <Timeboard currentDB={this.state.currentDB} isDBLoaded={this.state.isDBLoaded} /> 
+        <Timeboard 
+        currentDB={this.state.currentDB} 
+        isDBLoaded={this.state.isDBLoaded} 
+        stopSelected={this.state.stopSelected} 
+        /> 
       </div>
       </div>
     );
