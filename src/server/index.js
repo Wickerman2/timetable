@@ -48,6 +48,8 @@ app.get('/generateAT', (req, res) => {
 
 app.get('/searchStop/:input', (req, res) => {
   let paramsInput = req.params.input;
+  console.log('... STARTING SEARCHSTOP ... ');
+  console.log('paramsinput: ' + paramsInput);
 
   var options = { method: 'GET',
     url: 'https://api.vasttrafik.se/bin/rest.exe/v2/location.name',
@@ -60,16 +62,19 @@ app.get('/searchStop/:input', (req, res) => {
   request(options, function (error, response, body) {
     if (error) throw new Error(error);
     let result = JSON.parse(body);
-    let data = [];
-    data.push(result.LocationList.StopLocation);
 
-    if (Object.keys(result.LocationList.StopLocation).length === 5) {
-      res.send(data);
-    } else {
-    res.send(result.LocationList.StopLocation); 
-    }    
+    if ( typeof result.LocationList.StopLocation !== 'undefined' && typeof paramsInput !== 'undefined') {
+      if (Object.keys(result.LocationList.StopLocation).length === 5) {
+        let data = [];
+        data.push(result.LocationList.StopLocation);
+        res.send(data);
+      } else {
+      res.send(result.LocationList.StopLocation); 
+      }
+  } else {
+    console.log('Result is undefined!')
+  }    
   });
-  
 });
 
 app.get('/getDB/:input', (req, res) => {

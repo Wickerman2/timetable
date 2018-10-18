@@ -47,8 +47,8 @@ class Timeboard extends Component {
             }
             return (
                 <tr>
-                    <td>{journey.name}</td> 
-                    <td>{journey.direction}</td>
+                    <td><div className='journeyIcon' style={{backgroundColor : journey.fgColor, color : journey.bgColor}}>{journey.sname}</div></td> 
+                    <td><div className='tableText'>{journey.direction}</div></td>
                     <td>{journey.calcTimeLeft}</td> 
                     <td>{journey.track}</td>
                 </tr>   
@@ -93,7 +93,7 @@ class Timeboard extends Component {
                 <Table responsive>
                 <thead>
                     <tr>
-                    <th>Linje</th>
+                    <th className='lineTableHeader'>Linje</th>
                     <th>Destination</th>
                     <th>Avgår</th>
                     <th>Läge</th>
@@ -101,10 +101,19 @@ class Timeboard extends Component {
                 </thead>
 
                 <tbody>
-                    {this.createTableRows()};
+                {this.props.isDBLoaded ? this.createTableRows() : 
+                    <div className='sweet-loading'>
+                        <ClipLoader
+                        className={override}
+                        sizeUnit={"px"}
+                        size={100}
+                        color={'#3C4650'}
+                        loading={true}
+                        />
+                    </div>}
                 </tbody>
 
-                </Table>;
+                </Table>
             </div>
         );
     }
@@ -112,14 +121,5 @@ class Timeboard extends Component {
 
 export default Timeboard;
 /*
-{this.props.isDBLoaded ? this.createTableRows() : 
-    <div className='sweet-loading'>
-        <ClipLoader
-        className={override}
-        sizeUnit={"px"}
-        size={100}
-        color={'#3C4650'}
-        loading={true}
-        />
-    </div>}
+
 */
