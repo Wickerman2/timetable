@@ -12,111 +12,108 @@ const override = css`
 `;
 
 class Timeboard extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            curTime: '' 
-        }
-    }
-    componentDidMount() {
-        setInterval( () => {
-        var now = new Date();
-          this.setState({
-            curTime : dateFormat(now, "HH:MM")
-          })
-        },1000)
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      curTime: '',
+    };
+  }
 
-    createTableRows() {
-        let table = this.props.currentDB;
-        let data = '';
+  componentDidMount() {
+    setInterval(() => {
+      const now = new Date();
+      this.setState({
+        curTime: dateFormat(now, 'HH:MM'),
+      });
+    }, 1000);
+  }
 
-        for (let i = 0; i < table.length; i++) { // Adding calculated time left to for each JSON object.  
-            let calcTimeLeft = this.calculateTimeLeft(table[i].rtTime, table[i].time, table[i].date);
-            table[i].calcTimeLeft = calcTimeLeft;
-        }
+  createTableRows() {
+    const table = this.props.currentDB;
+    let data = '';
 
-        table.sort(function(a, b) {
-            return a.calcTimeLeft - b.calcTimeLeft || a.track - b.track;
-        });
-        
-        try {
-        data = table.map(journey => {
-            if (journey.calcTimeLeft === 0) {
-                journey.calcTimeLeft = 'Nu';
-            }
-            return (
-                <tr>
-                    <td><div className='journeyIcon' style={{backgroundColor : journey.fgColor, color : journey.bgColor}}>{journey.sname}</div></td> 
-                    <td><div className='tableText'>{journey.direction}</div></td>
-                    <td>{journey.calcTimeLeft}</td> 
-                    <td>{journey.track}</td>
-                </tr>   
-            )      
-        })
-        } catch (error) {
-            console.log(error);
-            console.log('Could not createTableRows!');
-        }
-        
-        return data;
+    for (let i = 0; i < table.length; i += 1) { // Adding calculated time left to for each JSON object.
+      const calcTimeLeft = this.calculateTimeLeft(table[i].rtTime, table[i].time, table[i].date);
+      table[i].calcTimeLeft = calcTimeLeft;
     }
 
-    calculateTimeLeft(journeyrtTime, journeyTableTime, journeyDate) { 
-        var JRT = journeyrtTime;
-        var JTT = journeyTableTime; 
-        var JD = journeyDate + ' ';
-        var roundedMinutes = '';
+    table.sort((a, b) => a.calcTimeLeft - b.calcTimeLeft || a.track - b.track);
 
-        if (typeof JRT !== "undefined") {
-            var timestamp = JD.concat(JRT);         
-            var diffMs = Math.abs(new Date() - new Date(timestamp));
-            var diffSeconds = (diffMs / 1000);
-            var diffMinutes = (diffSeconds / 60);
-            roundedMinutes = Math.round(diffMinutes);
-
-        } else if (typeof JRT === "undefined") {
-            var timestamp = JD.concat(JTT);         
-            var diffMs = Math.abs(new Date() - new Date(timestamp));
-            var diffSeconds = (diffMs / 1000);
-            var diffMinutes = (diffSeconds / 60);
-            roundedMinutes = Math.round(diffMinutes);
+    try {
+      data = table.map((journey) => {
+        if (journey.calcTimeLeft === 0) {
+          journey.calcTimeLeft = 'Nu';
         }
-
-        return roundedMinutes;
-    }
-
-    render() {
         return (
-            
-            <div className="timeBoard">          
-                <Table responsive>
-                <thead>
-                    <tr>
-                    <th className='lineTableHeader'>Linje</th>
-                    <th>Destination</th>
-                    <th>Avgår</th>
-                    <th>Läge</th>
-                    </tr>
-                </thead>
-
-                <tbody>               
-                {this.props.isDBLoaded ? this.createTableRows() : 
-                    <div>
-                        <ClipLoader
-                        className={override}
-                        sizeUnit={"px"}
-                        size={100}
-                        color={'#3C4650'}
-                        loading={true}
-                        />
-                    </div>}
-                </tbody>
-
-                </Table>
-            </div>
+          <tbody>
+            <tr>
+              <td><div className="journeyIcon" style={{ backgroundColor: journey.fgColor, color: journey.bgColor }}>{journey.sname}</div></td>
+              <td><div className="tableText">{journey.direction}</div></td>
+              <td>{journey.calcTimeLeft}</td>
+              <td>{journey.track}</td>
+            </tr>
+          </tbody>
         );
+      });
+    } catch (error) {
+      console.log(error);
+      console.log('Could not createTableRows!');
     }
+
+    return data;
+  }
+
+  calculateTimeLeft(journeyrtTime, journeyTableTime, journeyDate) {
+    let JRT = journeyrtTime;
+    let JTT = journeyTableTime;
+    let JD = `${journeyDate  } `;
+    let roundedMinutes = '';
+
+    if (typeof JRT !== 'undefined') {
+      var timestamp = JD.concat(JRT);
+      var diffMs = Math.abs(new Date() - new Date(timestamp));
+      var diffSeconds = (diffMs / 1000);
+      var diffMinutes = (diffSeconds / 60);
+      roundedMinutes = Math.round(diffMinutes);
+    } else if (typeof JRT === 'undefined') {
+      var timestamp = JD.concat(JTT);
+      var diffMs = Math.abs(new Date() - new Date(timestamp));
+      var diffSeconds = (diffMs / 1000);
+      var diffMinutes = (diffSeconds / 60);
+      roundedMinutes = Math.round(diffMinutes);
+    }
+
+    return roundedMinutes;
+  }
+
+  render() {
+    return (
+      <div className="timeBoard">
+        <Table responsive>
+          <thead>
+            <tr>
+              <th className="lineTableHeader">Linje</th>
+              <th>Destination</th>
+              <th>Avgår</th>
+              <th>Läge</th>
+            </tr>
+          </thead>
+
+          {this.props.isDBLoaded ? this.createTableRows() : (
+            <div>
+              <ClipLoader
+                className={override}
+                sizeUnit="px"
+                size={100}
+                color="#3C4650"
+                loading
+              />
+            </div>
+          )}
+        </Table>
+      </div>
+    );
+  }
 }
 
 export default Timeboard;
