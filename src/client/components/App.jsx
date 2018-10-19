@@ -44,6 +44,7 @@ class App extends Component {
   }
      
   async searchStopData(searchText){
+    if (typeof searchText !== 'undefined') {
       try {
         const res = await fetch(`/searchStop/${searchText}`); 
         const result = await res.json();
@@ -52,12 +53,15 @@ class App extends Component {
           console.log(err);
           console.log('Could not search stopdata!')
       }
+    }
   }
 
   async getDepartureBoard(stopID){
+    if (!this.state.stopSelected) {
     this.setState({
       isDBLoaded: false
     });
+    }
   
     if (stopID !== '') {
       try {
@@ -89,19 +93,23 @@ class App extends Component {
     return item.id;
   }
 
-  onChange(e){ // Kolla så att det inte finns några skadliga tecken innan !!! 
+  onChange(e){ 
     this.setState({
         value: e.target.value,
         autocompleteData: [],
         stopSelected: false
     });
-    e.persist()
-    this.debounceAutocomplete(this.state.value);
+    
+    e.persist();
+    
+    if (!e.target.value.includes(' ') || (!e.target.value === (''))) {
+      this.debounceAutocomplete(this.state.value);
+    }
+
     clearInterval(refreshRateInterval); 
   }
 
   refreshCurrentDB() {
-    console.log('fresh');
     this.getDepartureBoard(this.state.selectedStopID);
   }
 

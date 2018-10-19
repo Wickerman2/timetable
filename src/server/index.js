@@ -48,8 +48,6 @@ app.get('/generateAT', (req, res) => {
 
 app.get('/searchStop/:input', (req, res) => {
   let paramsInput = req.params.input;
-  console.log('... STARTING SEARCHSTOP ... ');
-  console.log('paramsinput: ' + paramsInput);
 
   var options = { method: 'GET',
     url: 'https://api.vasttrafik.se/bin/rest.exe/v2/location.name',

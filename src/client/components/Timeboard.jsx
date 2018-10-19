@@ -100,9 +100,9 @@ class Timeboard extends Component {
                     </tr>
                 </thead>
 
-                <tbody>
+                <tbody>               
                 {this.props.isDBLoaded ? this.createTableRows() : 
-                    <div className='sweet-loading'>
+                    <div>
                         <ClipLoader
                         className={override}
                         sizeUnit={"px"}
@@ -120,6 +120,3 @@ class Timeboard extends Component {
 }
 
 export default Timeboard;
-/*
-
-*/
