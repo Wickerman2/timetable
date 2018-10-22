@@ -17,13 +17,12 @@ class Timeboard extends Component {
     this.state = {
       curTime: '',
     };
+    
   }
 
   componentDidMount() {
     setInterval(() => {
-      const t = date.split(/[- :]/);
-      const d = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
-      const now = new Date(d);
+      const now = new Date();
       this.setState({
         curTime: dateFormat(now, 'HH:MM'),
       });
@@ -65,26 +64,26 @@ class Timeboard extends Component {
     return data;
   }
 
+  // Takes the realtime or the tabletime from the API and converts it to minutes.
   calculateTimeLeft(journeyrtTime, journeyTableTime, journeyDate) {
-    let JRT = journeyrtTime;
-    let JTT = journeyTableTime;
-    let JD = `${journeyDate  } `;
+    const JRT = journeyrtTime;
+    const JTT = journeyTableTime;
+    const JD = `${journeyDate} `;
     let roundedMinutes = '';
-
+  
     if (typeof JRT !== 'undefined') {
-      var timestamp = JD.concat(JRT);
-      var diffMs = Math.abs(new Date() - new Date(timestamp));
-      var diffSeconds = (diffMs / 1000);
-      var diffMinutes = (diffSeconds / 60);
+      const timestamp = JD.concat(JRT);
+      const diffMs = Math.abs(new Date() - new Date(timestamp));
+      const diffSeconds = (diffMs / 1000);
+      const diffMinutes = (diffSeconds / 60);
       roundedMinutes = Math.round(diffMinutes);
     } else if (typeof JRT === 'undefined') {
-      var timestamp = JD.concat(JTT);
-      var diffMs = Math.abs(new Date() - new Date(timestamp));
-      var diffSeconds = (diffMs / 1000);
-      var diffMinutes = (diffSeconds / 60);
+      const timestamp = JD.concat(JTT);
+      const diffMs = Math.abs(new Date() - new Date(timestamp));
+      const diffSeconds = (diffMs / 1000);
+      const diffMinutes = (diffSeconds / 60);
       roundedMinutes = Math.round(diffMinutes);
     }
-
     return roundedMinutes;
   }
 
