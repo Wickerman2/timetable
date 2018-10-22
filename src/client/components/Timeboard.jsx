@@ -21,7 +21,9 @@ class Timeboard extends Component {
 
   componentDidMount() {
     setInterval(() => {
-      const now = new Date();
+      const t = date.split(/[- :]/);
+      const d = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
+      const now = new Date(d);
       this.setState({
         curTime: dateFormat(now, 'HH:MM'),
       });
