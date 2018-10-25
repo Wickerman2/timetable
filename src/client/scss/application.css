@@ -136,7 +136,10 @@ h1 {
       .Rtable--collapse .destination-cell .Rtable-cell--content {
         padding-left: 0 !important; }
     .Rtable--collapse .Rtable-row--head {
-      display: none; } }
+      display: none; }
+  .loadingSpinner {
+    margin: auto;
+    padding: 3%; } }
 
 .no-flexbox .Rtable {
   display: block; }
