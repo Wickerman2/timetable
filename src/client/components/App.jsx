@@ -111,7 +111,7 @@ class App extends Component {
 
   
   refreshCurrentDB() {
-    // this.getDepartureBoard(this.state.selectedStopID);
+    this.getDepartureBoard(this.state.selectedStopID);
   }
   
 
