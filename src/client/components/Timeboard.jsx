@@ -70,56 +70,35 @@ class Timeboard extends Component {
     return data;
   }
 
-  convertDateForIos(date) {
-    var arr = date.split(/[- :]/);
-    date = new Date(arr[0], arr[1]-1, arr[2], arr[3], arr[4], arr[5]);
-    console.log('date: ' + date);
-    return date;
-  }
-
   // Takes the realtime or the tabletime from the API and converts it to minutes.
   calculateTimeLeft(journeyrtTime, journeyTableTime, journeyDate) {
     const JRT = journeyrtTime;
     const JTT = journeyTableTime;
     const JD = `${journeyDate} `;
+
     let roundedMinutes = '';
   
     if (typeof JRT !== 'undefined') {
 
-
       const timestamp = JD.concat(JRT);
-      console.log('timestamp: ' + timestamp);
-      let arr = timestamp.split(/[- :]/);
+      const arr = timestamp.split(/[- :]/);
       let date = new Date(arr[0], arr[1]-1, arr[2], arr[3], arr[4]);
-      console.log('date: ' + date);
-
       const diffMs = Math.abs(new Date() - new Date(date));
       const diffSeconds = (diffMs / 1000);
-      const diffMinutes = (diffSeconds / 60);
-      
-      
+      const diffMinutes = (diffSeconds / 60);     
       roundedMinutes = Math.round(diffMinutes);
-
 
     } else if (typeof JRT === 'undefined') {
-      const timestamp = JD.concat(JTT);
 
-      console.log('timestamp: ' + timestamp);
-      let arr = timestamp.split(/[- :]/);
-      let date = new Date(arr[0], arr[1]-1, arr[2], arr[3], arr[4]);
-      console.log('date: ' + date);
-      
-      
-      const diffMs = Math.abs(new Date() - new Date(timestamp));
+      const timestamp = JD.concat(JTT);
+      const arr = timestamp.split(/[- :]/);
+      let date = new Date(arr[0], arr[1]-1, arr[2], arr[3], arr[4]);    
+      const diffMs = Math.abs(new Date() - new Date(date));
       const diffSeconds = (diffMs / 1000);
-      const diffMinutes = (diffSeconds / 60);
-      
-      
+      const diffMinutes = (diffSeconds / 60);      
       roundedMinutes = Math.round(diffMinutes);
 
-
     }
-    console.log('roundedMinutes: ' + roundedMinutes);
     return roundedMinutes;
   }
 
