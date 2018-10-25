@@ -104,15 +104,11 @@ h1 {
   .Rtable--collapse {
     display: block;
     width: 100%;
-    padding: 1em;
     box-shadow: none; }
     .Rtable--collapse .Rtable-row {
       box-sizing: border-box;
       width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      margin-bottom: 2em;
-      box-shadow: 0 0 40px rgba(0, 0, 0, 0.2); }
+      display: flex; }
       .Rtable--collapse .Rtable-row .Rtable-cell {
         width: 100% !important;
         display: flex;
