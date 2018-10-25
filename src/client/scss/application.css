@@ -22,7 +22,8 @@ h1 {
 
 .loadingSpinner {
   margin: auto;
-  padding: 3%; }
+  padding: 3%;
+  width: fit-content; }
 
 .journeyIcon {
   font-weight: bold;
@@ -136,10 +137,7 @@ h1 {
       .Rtable--collapse .destination-cell .Rtable-cell--content {
         padding-left: 0 !important; }
     .Rtable--collapse .Rtable-row--head {
-      display: none; }
-  .loadingSpinner {
-    margin: auto;
-    padding: 3%; } }
+      display: none; } }
 
 .no-flexbox .Rtable {
   display: block; }

@@ -28,6 +28,7 @@ h1 {
 .loadingSpinner {
   margin: auto;
   padding: 3%;
+  width: fit-content;
 }
 
 .journeyIcon {
@@ -177,11 +178,6 @@ $heading-color:#FFFFFF;
     .Rtable-row--head {
       display: none;
     }
-  }
-
-  .loadingSpinner {
-    margin: auto;
-    padding: 3%;
   }
 }
 
