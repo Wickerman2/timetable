@@ -46,14 +46,20 @@ class Timeboard extends Component {
           journey.calcTimeLeft = 'Nu';
         }
         return (
-          <tbody>
-            <tr>
-              <td><div className="journeyIcon" style={{ backgroundColor: journey.fgColor, color: journey.bgColor }}>{journey.sname}</div></td>
-              <td><div className="tableText">{journey.direction}</div></td>
-              <td>{journey.calcTimeLeft}</td>
-              <td>{journey.track}</td>
-            </tr>
-          </tbody>
+          <div class="Rtable-row">
+          <div class="Rtable-cell name-cell">
+            <div class="Rtable-cell--content date-content"><div className="journeyIcon" style={{ backgroundColor: journey.fgColor, color: journey.bgColor }}>{journey.sname}</div></div>
+          </div>
+          <div class="Rtable-cell destination-cell">
+            <div class="Rtable-cell--content title-content">{journey.direction}</div>
+          </div>
+          <div class="Rtable-cell timeleft-cell">
+            <div class="Rtable-cell--content timeleft-content">{journey.calcTimeLeft}</div>
+          </div>
+          <div class="Rtable-cell track-cell">
+            <div class="Rtable-cell--content track-content">{journey.track}</div>
+          </div>
+        </div>
         );
       });
     } catch (error) {
@@ -89,29 +95,26 @@ class Timeboard extends Component {
 
   render() {
     return (
-      <div className="timeBoard">
-        <Table responsive>
-          <thead>
-            <tr>
-              <th className="lineTableHeader">Linje</th>
-              <th>Destination</th>
-              <th>Avgår</th>
-              <th>Läge</th>
-            </tr>
-          </thead>
-
-          {this.props.isDBLoaded ? this.createTableRows() : (
-            <div>
-              <ClipLoader
-                className={override}
-                sizeUnit="px"
-                size={100}
-                color="#3C4650"
-                loading
-              />
-            </div>
-          )}
-        </Table>
+      <div class="wrapper">
+        <div class="Rtable Rtable--4cols Rtable--collapse">
+          <div class="Rtable-row Rtable-row--head">
+            <div class="Rtable-cell name-cell column-heading nameTableHeader">Linje</div>
+            <div class="Rtable-cell destination-cell column-heading">Destination</div>
+            <div class="Rtable-cell timeleft-cell column-heading">Avgår</div>
+            <div class="Rtable-cell track-cell column-heading">Läge</div>
+          </div>    
+            {this.props.isDBLoaded ? this.createTableRows() : (
+                  <div className='loadingSpinner'>
+                    <ClipLoader
+                      className={override}
+                      sizeUnit="px"
+                      size={100}
+                      color="#3C4650"
+                      loading
+                    />
+                  </div>
+            )}
+          </div>
       </div>
     );
   }

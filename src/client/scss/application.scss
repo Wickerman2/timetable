@@ -2,6 +2,11 @@ body {
   background: #FFFFFF;
   color: #3C4650;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.5em;
+}
+
+#root {
+  height: 100%
 }
 
 h1 { 
@@ -20,6 +25,11 @@ h1 {
   width: 60%;
 }
 
+.loadingSpinner {
+  margin: auto;
+  padding: 3%;
+}
+
 .journeyIcon {
   font-weight: bold;
   background-color: #1CAEE0;
@@ -34,7 +44,147 @@ h1 {
   padding: 0.1em
 }
 
-.lineTableHeader {
+.nameTableHeader {
   width: 5%;
   text-align: center;
+}
+
+/* RESPONSIVENESS STARTS HERE */
+
+$breakpoint: 500px;
+$heading-color:#FFFFFF;
+
+* {
+  box-sizing: border-box;
+}
+
+.wrapper {
+  width: 100%;
+}
+
+.is-striped { background-color: rgba(233,200,147,0.2) }
+
+
+/* Table column sizing
+================================== */
+.name-cell  { width: 10%; }
+.destination-cell  { width: 41%; }
+.timeleft-cell  { width: 13%; }
+.track-cell  { width: 13%; }
+
+/* Apply styles
+================================== */
+.Rtable {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 3em 0;
+  padding: 0;
+  box-shadow: 0 0 40px rgba(0,0,0,0.2);
+  
+  .Rtable-row {
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid #DDDDDD;
+    
+    .Rtable-cell {
+      box-sizing: border-box;
+      flex-grow: 1;
+      padding: 0.8em 1.2em;
+      overflow: hidden; // Or flex might break
+      list-style: none;
+
+      &.column-heading {
+        background-color: $heading-color;
+        color: black;
+        padding: 1em;
+        font-weight: bold;
+      }
+
+      .Rtable-cell--heading {
+        display: none;
+        
+      }
+
+      .Rtable-cell--content {
+        a {
+          font-size: 2em;
+          color: #333;
+        }
+        
+        .webinar-date {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
+
+/* Responsive (MOBILE! :) )
+==================================== */
+@media all and (max-width: $breakpoint) {
+  .is-striped {
+    background-color: white;
+  }
+  
+  .Rtable--collapse  {
+    display: block;
+    width: 100%;
+    padding: 1em;
+    box-shadow: none;
+    
+    .Rtable-row {
+      box-sizing: border-box;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 2em;
+      box-shadow: 0 0 40px rgba(0,0,0,0.2);
+      
+      .Rtable-cell {
+        width: 100% !important;
+        display: flex;
+        align-items: center;
+
+        .Rtable-cell--heading {
+          display: inline-block;
+          flex: 1;
+          max-width: 120px;
+          min-width: 120px;
+          color: $heading-color;
+          font-weight: 700;
+          border-right: 1px solid #ccc;
+          margin-right: 1em;
+        }
+
+        .Rtable-cell--content {
+          flex: 2;
+          padding-left: 1em;
+        }
+      }
+    }
+    
+    .destination-cell {
+      background-color: $heading-color;
+      color: black;
+      font-weight: 700;
+      order: -1;
+      
+      .Rtable-cell--content {
+        padding-left: 0 !important;
+      }
+    }
+    
+    .Rtable-row--head {
+      display: none;
+    }
+  }
+}
+
+// Non-Flex modernizer fallback
+.no-flexbox .Rtable {
+  display: block;
+  
+  &.Rtable-cell {
+    width: 100%;
+  }
 }
