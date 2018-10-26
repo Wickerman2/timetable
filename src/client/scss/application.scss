@@ -2,7 +2,7 @@ body {
   background: #FFFFFF;
   color: #3C4650;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 1.5em;
+  font-size: 1.7em;
 }
 
 #root {
@@ -170,10 +170,10 @@ $heading-color:#FFFFFF;
         padding-left: 0 !important;
       }
     }
-    
-    .Rtable-row--head {
-      display: none;
-    }
+
+  }
+  body {
+    font-size: 1.1em;
   }
 }
 

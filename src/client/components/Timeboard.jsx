@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../scss/application.css';
-import { Table } from 'react-bootstrap';
 import dateFormat from 'dateformat';
 import { ClipLoader } from 'react-spinners';
 import { css } from 'react-emotion';

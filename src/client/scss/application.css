@@ -2,7 +2,7 @@ body {
   background: #FFFFFF;
   color: #3C4650;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 1.5em; }
+  font-size: 1.7em; }
 
 #root {
   height: 100%; }
@@ -132,8 +132,8 @@ h1 {
       order: -1; }
       .Rtable--collapse .destination-cell .Rtable-cell--content {
         padding-left: 0 !important; }
-    .Rtable--collapse .Rtable-row--head {
-      display: none; } }
+  body {
+    font-size: 1.1em; } }
 
 .no-flexbox .Rtable {
   display: block; }

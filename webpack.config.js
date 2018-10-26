@@ -7,6 +7,7 @@ const config = {
   entry: {
     main: APP_DIR.concat('/index.js'),
   },
+  performance: { hints: false },
   output: {
     filename: 'bundle.js',
     path: BUILD_DIR,
