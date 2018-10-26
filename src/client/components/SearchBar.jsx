@@ -12,7 +12,7 @@ class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 'Sök hållplats',
+      value: '',
       selectedStopID: '',
       stopSelected: false,
       autocompleteData: [],
@@ -136,6 +136,7 @@ class SearchBar extends Component {
             onSelect={this.onSelect}
             inputProps={
               {
+                placeholder: 'Sök hållplats',
                 style: {
                   width: '100%',
                   height: '60%',
@@ -145,7 +146,8 @@ class SearchBar extends Component {
                   'border-radius': '5px',
                   'padding-left': '7px',
                 },
-              }}
+              }
+            }
             wrapperStyle={
               {
                 width: '50%',
