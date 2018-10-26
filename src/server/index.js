@@ -1,5 +1,3 @@
-const config = require('./config.js');
-
 const express = require('express');
 
 const app = express();
@@ -8,9 +6,11 @@ const bodyParser = require('body-parser');
 
 const request = require('request');
 
+require('dotenv').config();
+
 const port = process.env.PORT || 3000;
 
-const Authorization = config.Authorization;
+const Authorization = process.env.REACT_APP_API_KEY;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
