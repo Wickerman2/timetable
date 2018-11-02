@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "homepage": ".",
+  "homepage": "./",
   "scripts": {
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
@@ -13,7 +13,7 @@
     "test": "mocha --compilers babel-core/register ./test/*test.js",
     "lint": "eslint ./src/server/index.js"
   },
-  "proxy": "http://www.wickerstrom.com/",
+  "proxy": "http://localhost:3000",
   "keywords": [],
   "author": "",
   "license": "ISC",
