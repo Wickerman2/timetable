@@ -10,7 +10,9 @@ require('dotenv').config();
 
 const port = process.env.PORT || 3000;
 
-const Authorization = process.env.REACT_APP_API_KEY;
+const Authorization = 'VUFmVExKQ1pmM1JLdDNma3NUc3ZudWRnNnFJYTpDSEIwU01Qal8wMGFPNGVCbDNZUk85ODlvcEFh'
+
+// const Authorization = process.env.REACT_APP_API_KEY;
 
 app.use( express.static( `${__dirname}/../build` ) );
 
