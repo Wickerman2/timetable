@@ -152,7 +152,7 @@ class SearchBar extends Component {
               {
                 width: '50%',
                 height: '100%',
-                margin: '0 auto',
+                margin: '2px auto',
               }
             }
 
