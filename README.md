@@ -1,7 +1,7 @@
 # timetable
 Using the Västtrafik API (https://developer.vasttrafik.se/portal), this React app lets users search for stops to see when the next tram or bus arrives. Uses Node.js/Express.js for fetching requests from the API. 
 
-Live demo: https://vttimeboard.herokuapp.com/
+Live demo: https://vttimeboard.herokuapp.com/ (Be patient, Heroku hosting might be slow sometimes)
 
 Setup Instructions:
 1. Go to https://developer.vasttrafik.se/portal and register! 
