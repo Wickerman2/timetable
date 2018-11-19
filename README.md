@@ -8,8 +8,10 @@ Setup Instructions:
 2. Get your own accesstoken.
 3. Download this project, create a .env in the root folder with the following code:
 ```
-REACT_APP_API_KEY = '[YOUR ACCESSTOKEN HERE]'
+REACT_APP_API_KEY = 'YOUR ACCESSTOKEN HERE'
 ```
 3. Type "npm install" in the terminal
 4. Type "npm run webpack" in the terminal
 5. Type "npm start" to start a localhost 
+
+Enjoy! 
