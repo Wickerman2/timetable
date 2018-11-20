@@ -78,6 +78,11 @@ $heading-color:#FFFFFF;
 ================================== */
 .Rtable {
   display: flex;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
   flex-wrap: wrap;
   margin: 0 0 3em 0;
   padding: 0;
@@ -86,6 +91,11 @@ $heading-color:#FFFFFF;
   .Rtable-row {
     width: 100%;
     display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
     border-bottom: 1px solid #DDDDDD;
     
     .Rtable-cell {
@@ -137,9 +147,19 @@ $heading-color:#FFFFFF;
       box-sizing: border-box;
       width: 100%;
       display: flex;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -moz-flex;
+      display: -webkit-flex;
       
       .Rtable-cell {
         width: 100% !important;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -moz-flex;
+        display: -webkit-flex;
         display: flex;
         align-items: center;
 

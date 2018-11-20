@@ -69,6 +69,11 @@ h1 {
 ================================== */
 .Rtable {
   display: flex;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
   flex-wrap: wrap;
   margin: 0 0 3em 0;
   padding: 0;
@@ -76,6 +81,11 @@ h1 {
   .Rtable .Rtable-row {
     width: 100%;
     display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
     border-bottom: 1px solid #DDDDDD; }
     .Rtable .Rtable-row .Rtable-cell {
       box-sizing: border-box;
@@ -108,9 +118,19 @@ h1 {
     .Rtable--collapse .Rtable-row {
       box-sizing: border-box;
       width: 100%;
-      display: flex; }
+      display: flex;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -moz-flex;
+      display: -webkit-flex; }
       .Rtable--collapse .Rtable-row .Rtable-cell {
         width: 100% !important;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -moz-flex;
+        display: -webkit-flex;
         display: flex;
         align-items: center; }
         .Rtable--collapse .Rtable-row .Rtable-cell .Rtable-cell--heading {
