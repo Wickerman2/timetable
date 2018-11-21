@@ -108,7 +108,7 @@ h1 {
 
 /* Responsive (MOBILE! :) )
 ==================================== */
-@media only screen and (max-width: 500px) {
+@media screen and (max-width: 500px) {
   .is-striped {
     background-color: white; }
   .Rtable--collapse {
