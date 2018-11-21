@@ -69,10 +69,10 @@ $heading-color:#FFFFFF;
 
 /* Table column sizing
 ================================== */
-.name-cell  { width: 10%; }
-.destination-cell  { width: 41%; }
-.timeleft-cell  { width: 13%; }
-.track-cell  { width: 13%; }
+.name-cell  { width: 15%; }
+.destination-cell  { width: 40%; }
+.timeleft-cell  { width: 15%; }
+.track-cell  { width: 15%; }
 
 /* Apply styles
 ================================== */
@@ -152,6 +152,7 @@ $heading-color:#FFFFFF;
       display: -ms-flexbox;
       display: -moz-flex;
       display: -webkit-flex;
+      text-align: center;
       
       .Rtable-cell {
         width: 100% !important;
@@ -162,6 +163,16 @@ $heading-color:#FFFFFF;
         display: -webkit-flex;
         display: flex;
         align-items: center;
+        padding: 0.8em 1.0em;
+        text-align: center;
+
+        &.column-heading {
+          background-color: $heading-color;
+          color: black;
+          padding: 1em 1em 1em 2em;
+          font-weight: bold;
+          display: inline-block;
+        }
 
         .Rtable-cell--heading {
           display: inline-block;
@@ -186,6 +197,8 @@ $heading-color:#FFFFFF;
       color: black;
       font-weight: 700;
       order: -1;
+      padding-left: 0.9em;
+
       
       .Rtable-cell--content {
         padding-left: 0 !important;
@@ -194,7 +207,7 @@ $heading-color:#FFFFFF;
 
   }
   body {
-    font-size: 1.7em;
+    font-size: 1.3em;
   }
 }
 
