@@ -139,7 +139,7 @@ h1 {
         .Rtable--collapse .Rtable-row .Rtable-cell.column-heading {
           background-color: #FFFFFF;
           color: black;
-          padding: 1em 1em 1em 2em;
+          padding: 1em 1em 1em;
           font-weight: bold;
           display: inline-block; }
         .Rtable--collapse .Rtable-row .Rtable-cell .Rtable-cell--heading {
@@ -152,18 +152,18 @@ h1 {
           border-right: 1px solid #ccc;
           margin-right: 1em; }
         .Rtable--collapse .Rtable-row .Rtable-cell .Rtable-cell--content {
-          flex: 2;
-          padding-left: 1em; }
+          flex: 2; }
     .Rtable--collapse .destination-cell {
       background-color: #FFFFFF;
       color: black;
       font-weight: 700;
       order: -1;
-      padding-left: 0.9em; }
+      padding-left: 0.9em;
+      display: none; }
       .Rtable--collapse .destination-cell .Rtable-cell--content {
         padding-left: 0 !important; }
   body {
-    font-size: 1.3em; } }
+    font-size: 1.4em; } }
 
 .no-flexbox .Rtable {
   display: block; }

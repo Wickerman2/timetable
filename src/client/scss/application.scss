@@ -169,7 +169,7 @@ $heading-color:#FFFFFF;
         &.column-heading {
           background-color: $heading-color;
           color: black;
-          padding: 1em 1em 1em 2em;
+          padding: 1em 1em 1em;
           font-weight: bold;
           display: inline-block;
         }
@@ -187,7 +187,6 @@ $heading-color:#FFFFFF;
 
         .Rtable-cell--content {
           flex: 2;
-          padding-left: 1em;
         }
       }
     }
@@ -198,6 +197,7 @@ $heading-color:#FFFFFF;
       font-weight: 700;
       order: -1;
       padding-left: 0.9em;
+      display: none;
 
       
       .Rtable-cell--content {
@@ -207,7 +207,7 @@ $heading-color:#FFFFFF;
 
   }
   body {
-    font-size: 1.3em;
+    font-size: 1.4em;
   }
 }
 
