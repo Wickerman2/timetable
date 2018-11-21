@@ -150,7 +150,7 @@ class SearchBar extends Component {
             }
             wrapperStyle={
               {
-                width: '50%',
+                width: '63%', 
                 height: '100%',
                 margin: '2px auto',
               }

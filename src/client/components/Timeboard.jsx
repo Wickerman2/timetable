@@ -37,7 +37,7 @@ class Timeboard extends Component {
       table[i].calcTimeLeft = calcTimeLeft;
     }
 
-    table.sort((a, b) => a.calcTimeLeft - b.calcTimeLeft || a.track - b.track);
+    table.sort((a, b) => a.calcTimeLeft - b.calcTimeLeft);
 
     try {
       data = table.map((journey) => {
